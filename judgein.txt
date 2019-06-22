@@ -1,0 +1,7 @@
+wangyi 94 64 54 65
+wanger 64 98 45 68
+wangsan 56 97 67 87
+wangsi 98 67 54 34
+wangwu 98 78 54 62
+wangliu 69 48 97 34
+wangqi 68 98 74 64 
