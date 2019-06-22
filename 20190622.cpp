@@ -59,16 +59,16 @@ int main() {
         for(int i=0; i<7; i++)
         {           
             string a;
-            stuin >> a;
+            judgein >> a;
             int score[4];
-            for(int j=0; i<4; j++)
+            for(int j=0; j<4; j++)
             {
             	int s;
-            	stuin >> s;
+            	judgein >> s;
 			}
         	jud[i].get(a,score);
         }        
-        stuin.close();
+        judgein.close();
     }    
     
     if (ljlout.is_open())
