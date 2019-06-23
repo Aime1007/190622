@@ -40,6 +40,7 @@ public:
 				cout <<" ";	
 		}        
     }
+    friend void average(judge *jud);
 private:
 	string name;
 	int score[4];
@@ -47,7 +48,31 @@ private:
 
 
 void average(judge *jud){
-	
+	int scor[4][7];
+	for(int i=0; i<4; i++ )
+		for(int j=0; j<7; j++ ){
+			scor[i][j] = (*(jud+j)).score[i];
+		}
+	for(int i=0; i<4; i++ )
+		for(int j=0; j<7; j++ ) {
+			cout << scor[i][j];
+			if( j==6 )
+				cout <<endl;
+			else
+				cout <<" ";						
+		}
+	int max,min;
+	for(int i=0; i<4; i++ ){
+		max=0,min=1000;
+		for(int j=0; j<7; j++ ){
+			if( scor[i][j]>max )
+				max = scor[i][j];
+			if( scor[i][j]<min )
+				min = scor[i][j];
+		}
+		cout << min <<" "<< max<<endl;
+	}
+		
 }
 int main() {
     student stu[4]; //对象数组 学生 
@@ -88,7 +113,7 @@ int main() {
         }        
         judgein.close();
     }    
-    //average(jud);
+    
     
     
     
@@ -109,6 +134,6 @@ int main() {
         //stu01.show();
         ljlout.close();
     }
-    
+    average(jud);
     return 0;
 }
