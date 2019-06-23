@@ -40,16 +40,15 @@ public:
 				cout <<" ";	
 		}        
     }
-    friend void average(judge *jud);
+    friend void average(judge *jud,double *avg1);
 private:
 	string name;
 	int score[4];
 };
 
-
-void average(judge *jud){
+void average(judge *jud,double *avg1){
 	int scor[4][7];
-	double avg[4];
+	//double avg[4];
 	int sum[4]={0,0,0,0};
 	for(int i=0; i<4; i++ )
 		for(int j=0; j<7; j++ ){
@@ -85,14 +84,15 @@ void average(judge *jud){
 			sum[i] += scor[i][j];
 			//cout << sum[i] <<" "<<endl;
 		}
-		avg[i] = 1.0*sum[i]/5;
-		cout << avg[i] <<endl;
+		*(avg1+i) = 1.0*sum[i]/5;
+		cout << *(avg1+i) <<endl;
 	}
 		
 }
 int main() {
     student stu[4]; //对象数组 学生 
     judge jud[7]; //对象数组 裁判 
+    double avg1[4];
     ifstream stuin("C:/Users/13109/Desktop/project/stuin.txt");
     ifstream judgein("/Users/13109/Desktop/project/judgein.txt");
     ofstream ljlout("C:/Users/13109/Desktop/project/ljlout.txt");
@@ -129,12 +129,6 @@ int main() {
         }        
         judgein.close();
     }    
-    
-    
-    
-    
-    
-    
     if (ljlout.is_open())
     {
         cout<<"file OK"<<endl;
@@ -146,10 +140,19 @@ int main() {
         {
         	jud[i].show();
 		}
-        //ljlout << <<endl;
-        //stu01.show();
+		average(jud,avg1);
+		for(int i=0; i<3; i++)
+			for(int j=0; j<3-i; j++ ){
+				if( avg1[j]>avg1[j+1]){
+					int t = avg1[j];
+					avg1[j] = avg1[j+1];
+					avg1[j+1] = t;
+				}
+			}
+		for(int i=0; i<4; i++ )
+        	ljlout << avg1[i]<<endl;
         ljlout.close();
     }
-    average(jud);
+    
     return 0;
 }
