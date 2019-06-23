@@ -21,25 +21,42 @@ private:
 
 class judge{
 public:
-	judge(){}
-	void get(string a,int *p){
-		name = a;
-		for(int i=0; i<4; i++) {
-			score[i]=*(p+i);
-		}
+	judge(){		
 	}
+	void get(string a,int *p){
+	
+		name = a;
+		for(int i=0; i<4; i++) 
+			score[i]=*(p+i);
+	}
+	void show()
+    {
+    	cout << name <<" ";
+    	for(int i=0; i<4; i++){
+    		cout << score[i];    	
+			if( i==3 )
+				cout <<endl;
+			else
+				cout <<" ";	
+		}        
+    }
 private:
 	string name;
-	int score[4]; 
+	int score[4];
 };
+
+
+void average(judge *jud){
+	
+}
 int main() {
-    student stu[4];
-    judge jud[7];
+    student stu[4]; //对象数组 学生 
+    judge jud[7]; //对象数组 裁判 
     ifstream stuin("C:/Users/13109/Desktop/project/stuin.txt");
     ifstream judgein("/Users/13109/Desktop/project/judgein.txt");
     ofstream ljlout("C:/Users/13109/Desktop/project/ljlout.txt");
     
-    if(stuin.is_open())
+    if(stuin.is_open()) //文件读取学生学号姓名 
     {
         cout<<"file OK"<<endl;
         for(int i=0; i<4; i++)
@@ -53,10 +70,10 @@ int main() {
         stuin.close();
     }
     
-    if(judgein.is_open())
+    if(judgein.is_open()) //文件读取裁判姓名 给四个学生打的分数 
     {
         cout<<"file OK"<<endl;
-        for(int i=0; i<7; i++)
+        for(int i=0; i<7; i++) //每个裁判 
         {           
             string a;
             judgein >> a;
@@ -65,11 +82,17 @@ int main() {
             {
             	int s;
             	judgein >> s;
+            	score[j] = s;
 			}
-        	jud[i].get(a,score);
+        	jud[i].get(a,score);  
         }        
         judgein.close();
     }    
+    //average(jud);
+    
+    
+    
+    
     
     if (ljlout.is_open())
     {
@@ -78,6 +101,10 @@ int main() {
         {                      
             stu[i].show();       
         }
+        for(int i=0; i<7; i++)
+        {
+        	jud[i].show();
+		}
         //ljlout << <<endl;
         //stu01.show();
         ljlout.close();
