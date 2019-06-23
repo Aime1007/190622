@@ -49,6 +49,8 @@ private:
 
 void average(judge *jud){
 	int scor[4][7];
+	double avg[4];
+	int sum[4]={0,0,0,0};
 	for(int i=0; i<4; i++ )
 		for(int j=0; j<7; j++ ){
 			scor[i][j] = (*(jud+j)).score[i];
@@ -62,15 +64,29 @@ void average(judge *jud){
 				cout <<" ";						
 		}
 	int max,min;
+	int sign_max,sign_min;
 	for(int i=0; i<4; i++ ){
 		max=0,min=1000;
 		for(int j=0; j<7; j++ ){
-			if( scor[i][j]>max )
+			if( scor[i][j]>max ){
 				max = scor[i][j];
-			if( scor[i][j]<min )
+				sign_max = j;
+			}				
+			if( scor[i][j]<min ){
 				min = scor[i][j];
+				sign_min = j;
+			}										
 		}
+		scor[i][sign_max]=0; scor[i][sign_min] =0;
 		cout << min <<" "<< max<<endl;
+	}
+	for(int i=0; i<4; i++ ){
+		for(int j=0; j<7; j++ ){
+			sum[i] += scor[i][j];
+			//cout << sum[i] <<" "<<endl;
+		}
+		avg[i] = 1.0*sum[i]/5;
+		cout << avg[i] <<endl;
 	}
 		
 }
